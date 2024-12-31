@@ -1,23 +1,35 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+    before_all do |lane|
+        cocoapods
+    end
+ desc "以 development 方式打包并上传到蒲公英"
+  lane :dev do
+
+    puts "以 development 方式打包"
+    gym(
+      # 指定打包所使用的输出方式 (可选: app-store, package, ad-hoc, enterprise, development)
+      export_method: "development",
+      # 默认Release Debug
+    configuration: "Debug",
+      # 指定项目的 scheme 名称
+      scheme: "TestDemo",
+      # 指定输出的文件夹地址
+      output_directory: "~/Desktop/ipa/dev/" + Time.new.strftime("%Y-%m-%d-%H:%M:%S"),
+    )
+
+    puts "上传 ipa 包到蒲公英"
+    pgyer(
+      # 蒲公英 API KEY
+      api_key: "eb1581dd3b3279311c1ca52e1b3f4d37",
+      update_description: "测试环境包"
+    )
+
   end
+    
 end
+
