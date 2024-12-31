@@ -1,0 +1,10 @@
+platform:ios,'10.0'
+abstract_target 'Default' do
+inhibit_all_warnings!
+
+pod 'AFNetworking'
+
+
+target 'TestDemo'
+
+end
