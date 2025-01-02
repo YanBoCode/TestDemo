@@ -26,7 +26,7 @@ platform :ios do
     pgyer(
       # 蒲公英 API KEY
       api_key: "eb1581dd3b3279311c1ca52e1b3f4d37",
-      update_description: "测试环境包"
+      update_description: "开发环境包"
     )
 
   end
